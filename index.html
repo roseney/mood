@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pilih Mood Anda</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+      background-color: #190f0f;
+    }
+    h1 {
+      color: #f4ebeb;
+      margin-bottom: 30px;
+    }
+    .mood-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .mood-card {
+      background-color: rgb(233, 241, 13);
+      border-radius: 10px;
+      padding: 20px;
+      width: 200px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .mood-card:hover {
+      transform: translateY(-10px);
+    }
+    .mood-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      object-fit: cover;
+      background-color: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+    .mood-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 15px 0 5px;
+    }
+    .mood-description {
+      font-size: 14px;
+      color: #4a3b3b;
+    }
+    .selected {
+      border: 3px solid #4CAF50;
+    }
+    .btn-continue {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      margin-top: 30px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      display: none;
+    }
+    .btn-continue:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bagaimana Mood Anda Hari Ini?</h1>
+  
+  <div class="mood-container">
+    <div class="mood-card" onclick="selectMood('buruk')">
+      <img src="badmood.jpg" alt="Mood Buruk" class="mood-image">
+      <div class="mood-title">Mood Buruk</div>
+      <div class="mood-description">Hari yang kurang menyenangkan? Kami siap membantumu!</div>
+    </div>
+    
+    <div class="mood-card" onclick="selectMood('biasa')">
+      <img src="nothing.jpg" alt="Mood Biasa Saja" class="mood-image">
+      <div class="mood-title">Biasa Saja</div>
+      <div class="mood-description">Hari yang standar? Mari kita tingkatkan!</div>
+    </div>
+    
+    <div class="mood-card" onclick="selectMood('baik')">
+      <img src="happy.jpg" alt="Mood Baik" class="mood-image">
+      <div class="mood-title">Mood Baik</div>
+      <div class="mood-description">Semangat! Mari pertahankan energi positifmu!</div>
+    </div>
+  </div>
+  
+  <button class="btn-continue" id="continueButton" onclick="continueToDashboard()">Lanjutkan</button>
+  
+  <script>
+    let selectedMood = null;
+    
+    function selectMood(mood) {
+      // Reset semua card
+      document.querySelectorAll('.mood-card').forEach(card => {
+        card.classList.remove('selected');
+      });
+      
+      // Pilih card yang diklik
+      const cards = document.querySelectorAll('.mood-card');
+      if (mood === 'buruk') {
+        cards[0].classList.add('selected');
+      } else if (mood === 'biasa') {
+        cards[1].classList.add('selected');
+      } else if (mood === 'baik') {
+        cards[2].classList.add('selected');
+      }
+      
+      selectedMood = mood;
+      
+      // Tampilkan tombol lanjutkan
+      document.getElementById('continueButton').style.display = 'inline-block';
+    }
+    
+    function continueToDashboard() {
+  if (selectedMood) {
+    window.location.href = `mood-video.html?mood=${selectedMood}`;
+  } else {
+    alert('Silakan pilih mood Anda terlebih dahulu!');
+  }
+}
+
+    
+  </script>
+</body>
+</html>

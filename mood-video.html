@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Video Mood</title>
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    video {
+      width: 80%;
+      max-width: 720px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Video Sesuai Mood Kamu</h1>
+  <div id="videoContainer">
+    <p>Memuat video...</p>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const mood = urlParams.get('mood');
+    
+    const videoContainer = document.getElementById('videoContainer');
+    
+    const videoMap = {
+      buruk: {
+        src: "jaemin.mp4",
+        text: "Ini akan membantumu merasa lebih baik 😊"
+      },
+      biasa: {
+        src: "core.mp4",
+        text: "Ayo tingkatkan harimu! 💪"
+      },
+      baik: {
+        src: "moody.mp4",
+        text: "Pertahankan mood positifmu! 🌞"
+      }
+    };
+
+    if (videoMap[mood]) {
+      videoContainer.innerHTML = `
+        <p>${videoMap[mood].text}</p>
+        <video controls autoplay>
+          <source src="${videoMap[mood].src}" type="video/mp4">
+          Browser Anda tidak mendukung tag video.
+        </video>
+      `;
+    } else {
+      videoContainer.innerHTML = "<p>Mood tidak dikenali. Silakan kembali dan pilih mood terlebih dahulu.</p>";
+    }
+  </script>
+
+</body>
+</html>
